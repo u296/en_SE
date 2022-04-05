@@ -1,5 +1,5 @@
 # en_SE
-en_SE locale for linux
+en_SE locale for linux, with some personal touches (such as "." as decimal point)
 
 ## Steps
 

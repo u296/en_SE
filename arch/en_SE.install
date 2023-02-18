@@ -1,0 +1,33 @@
+
+_locale_name="en_SE"
+_locale_gen_entry="${_locale_name}.UTF-8 UTF-8"
+_localedef_name="${_locale_name}.utf8"
+_locale_gen_entry_regex="${_locale_name}\.UTF-8\s+UTF-8"
+_any_regex="^\s*(#+.*)?${_locale_gen_entry_regex}"
+_commented_regex="^\s*#+.*${_locale_gen_entry_regex}"
+_uncommented_regex="^\s*${_locale_gen_entry_regex}"
+
+
+post_install() {
+	# ensure locale.gen has it
+	grep -qE "$_any_regex" "/etc/locale.gen" || \
+		echo "$_locale_gen_entry" >> "/etc/locale.gen"
+
+	# regen locale if uncommented
+	grep -qE "$_uncommented_regex" "/etc/locale.gen" && \
+		/usr/bin/locale-gen
+}
+
+post_upgrade() {
+	# regen locale if uncommented
+	grep -qE "$_uncommented_regex" "/etc/locale.gen" && \
+		/usr/bin/locale-gen
+}
+
+pre_remove() {
+	# remove from database
+	/usr/bin/localedef --delete-from-archive "${_localedef_name}"
+
+	# remove from locale.gen
+	sed -i "/^\s*\(#\+.*\)\?en_SE\.UTF-8\s\+UTF-8\(\s\+.*\)\?$/d" /etc/locale.gen
+}

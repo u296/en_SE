@@ -6,7 +6,7 @@ arch=('any')
 url="https://github.com/u296/en_SE"
 #license
 source=("https://github.com/u296/en_SE/releases/download/v${pkgver}/en_SE-v${pkgver}.tar.gz")
-sha256sums=("fd32536745dd31a894d319fff14ce2e05c3e7034b4e14941498d02b9f881543b")
+sha256sums=("dc20aa23d8ac02db430f2734811b34209f62e9f3d633d5620784f4d60683cd76")
 install=en_SE.install
 
 package() {

@@ -13,4 +13,4 @@ Depends = coreutils
 Depends = grep
 Description = "Fixing key composing for locale en_SE"
 When = PostTransaction
-Exec = sh -c 'export F="/usr/share/X11/locale/compose.dir";export _compose_regex="en_US.UTF-8/Compose:\s*en_SE.UTF-8";grep -qE "$_compose_regex" "$F" || echo "en_US.UTF-8/Compose: en_SE.UTF-8" >> "$F"'
+Exec = /bin/sh -c 'export F="/usr/share/X11/locale/compose.dir";export _compose_regex="en_US.UTF-8/Compose:\s*en_SE.UTF-8";grep -qE "$_compose_regex" "$F" || echo "en_US.UTF-8/Compose: en_SE.UTF-8" >> "$F"'

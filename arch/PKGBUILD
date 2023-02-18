@@ -1,14 +1,18 @@
 pkgname='locale-en_SE-git'
-pkgver='0.1.0'
+pkgver='0.2.0'
 pkgrel=1
 pkgdesc="A mostly international English locale with some Swedish specifics"
 arch=('any')
 url="https://github.com/u296/en_SE"
 #license
-source=("https://github.com/u296/en_SE/releases/download/v${pkgver}/en_SE")
-sha256sums=("d1d1c1689f5c60a3e023fe855b702197b4bdc458ff426c6d0ae002c3d79ff625")
+source=("https://github.com/u296/en_SE/releases/download/v${pkgver}/en_SE-v${pkgver}.tar.gz")
+sha256sums=("fd32536745dd31a894d319fff14ce2e05c3e7034b4e14941498d02b9f881543b")
 install=en_SE.install
 
 package() {
-	install -Dm644 "${srcdir}/en_SE" "${pkgdir}/usr/share/i18n/locales/en_SE"
+	cd ${srcdir}
+	tar -xzf en_SE-v${pkgver}.tar.gz
+
+	install -Dm644 "en_SE" "${pkgdir}/usr/share/i18n/locales/en_SE"
+	install -Dm644 "arch/locale-en_SE-git-compose.hook" "${pkgdir}/usr/share/libalpm/hooks/locale-en_SE-git-compose.hook"
 }
